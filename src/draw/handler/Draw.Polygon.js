@@ -19,29 +19,31 @@ L.Draw.Polygon = L.Draw.Polyline.extend({
 		}
 	},
 
-	initialize: function (map, options) {
+	initialize: function (map, options, cb) {
 		L.Draw.Polyline.prototype.initialize.call(this, map, options);
+		
+		this.cb = cb || function () {};
 
 		// Save the type so super can fire, need to do this as cannot do this.TYPE :(
 		this.type = L.Draw.Polygon.TYPE;
 	},
 
 	_updateFinishHandler: function () {
-		var markerCount = this._markers.length;
+		// var markerCount = this._markers.length;
 
-		// The first marker should have a click handler to close the polygon
-		if (markerCount === 1) {
-			this._markers[0].on('click', this._finishShape, this);
-		}
+		// // The first marker should have a click handler to close the polygon
+		// if (markerCount === 1) {
+		// 	this._markers[0].on('click', this._finishShape, this);
+		// }
 
-		// Add and update the double click handler
-		if (markerCount > 2) {
-			this._markers[markerCount - 1].on('dblclick', this._finishShape, this);
-			// Only need to remove handler if has been added before
-			if (markerCount > 3) {
-				this._markers[markerCount - 2].off('dblclick', this._finishShape, this);
-			}
-		}
+		// // Add and update the double click handler
+		// if (markerCount > 2) {
+		// 	this._markers[markerCount - 1].on('dblclick', this._finishShape, this);
+		// 	// Only need to remove handler if has been added before
+		// 	if (markerCount > 3) {
+		// 		this._markers[markerCount - 2].off('dblclick', this._finishShape, this);
+		// 	}
+		// }
 	},
 
 	_getTooltipText: function () {
@@ -50,9 +52,9 @@ L.Draw.Polygon = L.Draw.Polyline.extend({
 		if (this._markers.length === 0) {
 			text = L.drawLocal.draw.handlers.polygon.tooltip.start;
 		} else if (this._markers.length < 3) {
-			text = L.drawLocal.draw.handlers.polygon.tooltip.cont;
+			text = null;
 		} else {
-			text = L.drawLocal.draw.handlers.polygon.tooltip.end;
+			text = null;
 			subtext = this._getMeasurementString();
 		}
 
@@ -64,7 +66,7 @@ L.Draw.Polygon = L.Draw.Polyline.extend({
 
 	_getMeasurementString: function () {
 		var area = this._area;
-
+		
 		if (!area) {
 			return null;
 		}
