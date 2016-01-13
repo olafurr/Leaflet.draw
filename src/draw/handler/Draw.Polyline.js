@@ -156,7 +156,11 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 
 		this._vertexChanged(latlng, true);
 	},
-	finishShape: function () {
+	finishShape: function (cb) {
+		if (cb && typeof cb === 'function') {
+			this.cb = cb;
+		}
+		
 		this._finishShape();
 	},
 	_finishShape: function () {

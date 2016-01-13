@@ -29,12 +29,12 @@ L.Draw.Polygon = L.Draw.Polyline.extend({
 	},
 
 	_updateFinishHandler: function () {
-		// var markerCount = this._markers.length;
+		var markerCount = this._markers.length;
 
-		// // The first marker should have a click handler to close the polygon
-		// if (markerCount === 1) {
-		// 	this._markers[0].on('click', this._finishShape, this);
-		// }
+		// The first marker should have a click handler to close the polygon
+		if (markerCount === 1) {
+			this._markers[0].on('click', this._finishShape, this);
+		}
 
 		// // Add and update the double click handler
 		// if (markerCount > 2) {
