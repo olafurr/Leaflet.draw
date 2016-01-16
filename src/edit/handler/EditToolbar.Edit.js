@@ -23,10 +23,12 @@ L.EditToolbar.Edit = L.Handler.extend({
 		this.type = L.EditToolbar.Edit.TYPE;
 	},
 
-	enable: function () {
+	enable: function (cb) {
+		this.cb = cb || function () {};
 		if (this._enabled || !this._hasAvailableLayers()) {
 			return;
 		}
+
 		this.fire('enabled', {handler: this.type});
 			//this disable other handlers
 
@@ -96,6 +98,12 @@ L.EditToolbar.Edit = L.Handler.extend({
 				layer.edited = false;
 			}
 		});
+
+		if (editedLayers.getLayers().length !== 1) {
+			console.log('Leaflet.Draw: Number of edited layers was not 1, was', editedLayers.getLayers().length);
+		}
+
+		this.cb(editedLayers.getLayers()[0]);
 		this._map.fire('draw:edited', {layers: editedLayers});
 	},
 
