@@ -84,8 +84,8 @@ L.drawLocal = {
 		handlers: {
 			edit: {
 				tooltip: {
-					text: 'Drag handles, or marker to edit feature.',
-					subtext: 'Click cancel to undo changes.'
+					text: '',
+					subtext: ''
 				}
 			},
 			remove: {

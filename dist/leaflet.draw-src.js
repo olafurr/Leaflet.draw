@@ -92,8 +92,8 @@ L.drawLocal = {
 		handlers: {
 			edit: {
 				tooltip: {
-					text: 'Drag handles, or marker to edit feature.',
-					subtext: 'Click cancel to undo changes.'
+					text: '',
+					subtext: ''
 				}
 			},
 			remove: {
@@ -2554,8 +2554,8 @@ L.EditToolbar = L.Toolbar.extend({
 	getActions: function () {
 		return [
 			{
-				title: L.drawLocal.edit.toolbar.actions.save.title,
-				text: L.drawLocal.edit.toolbar.actions.save.text,
+				title: '',
+				text: '',
 				callback: this._save,
 				context: this
 			},
@@ -2699,7 +2699,7 @@ L.EditToolbar.Edit = L.Handler.extend({
 			map.getContainer().focus();
 
 			this._featureGroup.eachLayer(this._enableLayerEdit, this);
-
+			
 			this._tooltip = new L.Tooltip(this._map);
 			this._tooltip.updateContent({
 				text: L.drawLocal.edit.handlers.edit.tooltip.text,
