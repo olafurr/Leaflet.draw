@@ -89,7 +89,10 @@ L.EditToolbar.Edit = L.Handler.extend({
 		}, this);
 	},
 
-	save: function () {
+	save: function (cb) {
+
+		this.cb = cb || function () {};
+
 		var editedLayers = new L.LayerGroup();
 		this._featureGroup.eachLayer(function (layer) {
 			if (layer.edited) {
