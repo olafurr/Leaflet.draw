@@ -2731,9 +2731,11 @@ L.EditToolbar.Edit = L.Handler.extend({
 	},
 
 	save: function (cb) {
-
-		this.cb = cb || function () {};
-
+		
+		if (!this.cb) {
+			this.cb = cb || function () {};
+		}
+		
 		var editedLayers = new L.LayerGroup();
 		this._featureGroup.eachLayer(function (layer) {
 			if (layer.edited) {
