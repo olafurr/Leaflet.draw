@@ -59,11 +59,10 @@ L.EditToolbar.Edit = L.Handler.extend({
 
 			this._featureGroup.eachLayer(this._enableLayerEdit, this);
 			
-			this._tooltip = new L.Tooltip(this._map);
-			this._tooltip.updateContent({
-				text: L.drawLocal.edit.handlers.edit.tooltip.text,
-				subtext: L.drawLocal.edit.handlers.edit.tooltip.subtext
-			});
+			// this._tooltip = new L.Tooltip(this._map);
+			// this._tooltip.updateContent({
+			// 	text: '',
+			// });
 
 			this._map.on('mousemove', this._onMouseMove, this);
 		}
@@ -77,8 +76,8 @@ L.EditToolbar.Edit = L.Handler.extend({
 			// Clear the backups of the original layers
 			this._uneditedLayerProps = {};
 
-			this._tooltip.dispose();
-			this._tooltip = null;
+			// this._tooltip.dispose();
+			// this._tooltip = null;
 
 			this._map.off('mousemove', this._onMouseMove, this);
 		}
@@ -181,8 +180,8 @@ L.EditToolbar.Edit = L.Handler.extend({
 		delete layer.options.original;
 	},
 
-	_onMouseMove: function (e) {
-		this._tooltip.updatePosition(e.latlng);
+	_onMouseMove: function () {
+		// this._tooltip.updatePosition(e.latlng);
 	},
 
 	_hasAvailableLayers: function () {
